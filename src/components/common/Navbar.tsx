@@ -16,7 +16,7 @@ const Navbar: FC = () => {
       <div className='h-24 w-full flex justify-between items-center px-5 text-xl'>
         <Link href='/'>
           <a>
-            <div className='h-full w-auto pt-3'>
+            <div className='h-full w-40 sm:w-auto pt-3'>
               <Image
                 src='/pussy-dao-logo.png'
                 alt='Pussy DAO Logo'
@@ -84,7 +84,9 @@ const Navbar: FC = () => {
         <li>
           <Link href='/statement'>
             <a>
-              <NavLink>Artist Statement</NavLink>
+              <NavLink>
+                <span className='whitespace-nowrap'>Artist Statement</span>
+              </NavLink>
             </a>
           </Link>
         </li>
