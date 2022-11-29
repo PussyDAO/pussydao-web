@@ -5,7 +5,7 @@ const Footer = () => {
   const router = useRouter();
   return (
     <div className='flex h-24'>
-      <div className='w-1/2'>
+      <div className='w-full'>
         <ul className='h-full flex justify-evenly items-center text-xl font-body'>
           <li>
             <Link href='/terms'>
@@ -23,7 +23,7 @@ const Footer = () => {
         </ul>
       </div>
 
-      <div className='w-1/2 h-full -mt-10'>
+      {/* <div className='w-1/2 h-full -mt-10'>
         <Link href='/mint'>
           <a>
             <div className='bg-pink-700 rounded-l-full h-full p-2 pr-0 text-3xl'>
@@ -33,7 +33,7 @@ const Footer = () => {
             </div>
           </a>
         </Link>
-      </div>
+      </div> */}
     </div>
   );
 };

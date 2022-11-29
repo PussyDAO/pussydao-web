@@ -6,8 +6,6 @@ import {
 } from 'components/common';
 import { MainView } from 'components/MainView';
 import MintEthNft from 'components/MintEthNft';
-import Image from 'next/image';
-
 import { FC } from 'react';
 import { useAccount, useSigner } from 'wagmi';
 

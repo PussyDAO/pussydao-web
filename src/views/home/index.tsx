@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { HeaderTag, ParagraphTag } from 'components/common';
 import { MainView } from 'components/MainView';
+import Link from 'next/link';
 
 export const HomeView: FC = () => {
   return (
@@ -13,6 +14,13 @@ export const HomeView: FC = () => {
         redeem your NFT for IRL panties that cum in their very own
         collector&apos;s box.
       </ParagraphTag>
+      <Link href='/mint'>
+        <a>
+          <button className='bg-pink-200 text-black w-full rounded-lg p-3 mt-5 -mb-3 text-3xl'>
+            <span>Pre-mint an NFT</span>
+          </button>
+        </a>
+      </Link>
     </MainView>
   );
 };

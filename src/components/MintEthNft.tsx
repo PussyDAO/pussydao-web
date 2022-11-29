@@ -1,23 +1,38 @@
 import { FC, useEffect, useState } from 'react';
-import { useAccount, useContract, useSigner } from 'wagmi';
+import {
+  useAccount,
+  useContract,
+  useNetwork,
+  useWaitForTransaction,
+} from 'wagmi';
 import { useQuery, useMutation } from '@tanstack/react-query';
 import { abi } from 'utils/ethNftAbi';
-import { BigNumber, ethers } from 'ethers';
+import { ethers } from 'ethers';
 import { ParagraphTag } from './common';
 
 const MintEthNft: FC<{ signer: any }> = ({ signer }) => {
   const [amountToMint, setAmountToMint] = useState(1);
   const [txnHash, setTxnHash] = useState(null);
   const [error, setError] = useState(null);
+  const { chain } = useNetwork();
   const contract = useContract({
-    address: process.env.NEXT_PUBLIC_NFT_CONTRACT_ADDRESS,
-    abi,
+    addressOrName: process.env.NEXT_PUBLIC_NFT_CONTRACT_ADDRESS,
+    contractInterface: abi,
     signerOrProvider: signer.data,
+  });
+
+  const {
+    data: txnRes,
+    isLoading,
+    isError,
+  } = useWaitForTransaction({
+    hash: txnHash,
+    chainId: chain.id,
   });
 
   // fetch contract state from blockchain
   const { data, refetch } = useQuery({
-    queryKey: ['contract state', signer.isLoading, contract.address],
+    queryKey: ['contract state', signer.isLoading, contract.address, txnRes],
     queryFn: async () => {
       const mintPhase: 0 | 1 | 2 = await contract.mintPhase();
       const nftPrice = await contract.nftPrice();
@@ -32,13 +47,16 @@ const MintEthNft: FC<{ signer: any }> = ({ signer }) => {
   });
 
   // mint nfts
-  const { mutate, isLoading } = useMutation({
+  const { mutate: mint, isLoading: mintIsLoading } = useMutation({
     mutationFn: async () => {
-      const txn = await contract.mintPresale(amountToMint, {
-        value: ethers.utils.formatUnits(data.nftPrice.mul(amountToMint)),
-      });
-      setTxnHash(txn.hash);
-      await txn.wait();
+      if (data.mintPhase !== 0) {
+        const txn = await contract.mintPresale(amountToMint, {
+          value: data.nftPrice.mul(amountToMint),
+        });
+        setTxnHash(txn.hash);
+        await txn.wait();
+        await refetch();
+      }
     },
   });
 
@@ -113,14 +131,25 @@ const MintEthNft: FC<{ signer: any }> = ({ signer }) => {
           ETH
         </p>
       )}
-      <button
-        disabled={error}
-        onClick={() => console.log('MINT BABY')}
-        className='bg-pink-200 text-black w-44 rounded-lg p-2 mt-5 -mb-3 text-3xl'
-      >
-        Mint{' '}
-        {!!amountToMint && `${amountToMint} NFT${amountToMint > 1 ? 's' : ''}`}
-      </button>
+      <div className='h-20 flex items-center justify-center'>
+        {txnHash && mintIsLoading ? (
+          <ParagraphTag className='text-2xl'>Minting...</ParagraphTag>
+        ) : (
+          <button
+            disabled={
+              error ||
+              !amountToMint ||
+              data?.currentSupply.toNumber() + amountToMint > 600
+            }
+            onClick={() => mint()}
+            className='bg-pink-200 text-black w-44 rounded-lg p-2 mt-5 -mb-3 text-3xl'
+          >
+            {!!amountToMint
+              ? `Mint ${amountToMint} NFT${amountToMint > 1 ? 's' : ''}`
+              : `Select Amount`}
+          </button>
+        )}
+      </div>
     </div>
   );
 };
