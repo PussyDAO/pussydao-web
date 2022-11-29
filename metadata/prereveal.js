@@ -1,5 +1,8 @@
 const fs = require('fs').promises;
 
+// Prereveal Image CID: Qmf8BJxrNjmViULjLep4X4mfXNrAUhBEVeU7mGmZm2Pt7F
+// Prereveal JSON files CID: bafybeiao5zdrevbxhrbhja3smo44geom67znynvdcklvwzvixww3agnwma
+
 class NftMetadata {
   constructor(tokenId) {
     this.name = `PussyDAO OG #${tokenId}`;
