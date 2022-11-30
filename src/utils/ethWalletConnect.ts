@@ -4,7 +4,7 @@ import { alchemyProvider } from 'wagmi/providers/alchemy';
 import { publicProvider } from 'wagmi/providers/public';
 
 const chainsList =
-  process.env.NODE_ENV === 'development' ? [chain.hardhat] : [chain.mainnet];
+  process.env.NODE_ENV === 'development' ? [chain.goerli] : [chain.mainnet];
 
 const { chains, provider } = configureChains(chainsList, [
   alchemyProvider({ apiKey: process.env.NEXT_PUBLIC_ALCHEMY_ID }),
