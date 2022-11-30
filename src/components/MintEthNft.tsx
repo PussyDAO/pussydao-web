@@ -26,9 +26,7 @@ const MintEthNft: FC<{ signer: any }> = ({ signer }) => {
   const [mintingFree, setMintingFree] = useState(false);
   const { address } = useAccount();
   const { chain } = useNetwork();
-  const {
-    data: { value: balance },
-  } = useBalance({ addressOrName: address });
+  const { data: balance } = useBalance({ addressOrName: address });
   const contract = useContract({
     addressOrName: process.env.NEXT_PUBLIC_NFT_CONTRACT_ADDRESS,
     contractInterface: abi,
@@ -177,10 +175,9 @@ const MintEthNft: FC<{ signer: any }> = ({ signer }) => {
               </a>
             </ParagraphTag>
           </div>
+        ) : balance && balance.value && balance.value.lt(data?.nftPrice) ? (
+          <ParagraphTag className='text-2xl'>Insufficient Balance</ParagraphTag>
         ) : (
-          // : balance && balance.lt(data?.nftPrice) ? (
-          //   <ParagraphTag className='text-2xl'>Insufficient Balance</ParagraphTag>
-          // )
           <button
             disabled={
               error ||
