@@ -175,7 +175,10 @@ const MintEthNft: FC<{ signer: any }> = ({ signer }) => {
               </a>
             </ParagraphTag>
           </div>
-        ) : balance && balance.value && balance.value.lt(data?.nftPrice) ? (
+        ) : balance &&
+          balance.value &&
+          data &&
+          balance.value.lt(data.nftPrice) ? (
           <ParagraphTag className='text-2xl'>Insufficient Balance</ParagraphTag>
         ) : (
           <button
