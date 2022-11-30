@@ -12,13 +12,7 @@ export const MainView: FC = ({ children }) => {
           )}
           style={{ height: '585px', width: '585px' }}
         >
-          <Image
-            className='hover:opacity-0'
-            src='/nft-reflect1.png'
-            layout='fill'
-            quality={100}
-            priority
-          />
+          <Image src='/nft-reflect1.png' layout='fill' quality={100} priority />
           {/* // TODO hover change image */}
           {/* <Image
             className='opacity-0 hover:opacity-1'
