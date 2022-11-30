@@ -112,11 +112,12 @@ const MintEthNft: FC<{ signer: any }> = ({ signer }) => {
         Only 600 available for pre-mint! Max total supply is 900.
       </ParagraphTag>
       <div className='mt-3'>
-        <p className='text-2xl'>
+        {/* <p className='text-2xl'>
           Current {data?.mintPhase === 1 && 'Pre-mint'} Supply:
           <br />
           <b className='text-3xl'>{data?.currentSupply.toString()}/600</b>
-        </p>
+        </p> */}
+        <p className='text-2xl'>Total Supply: 600</p>
         {error && (
           <p className='text-red-500 bg-white p-2 rounded-lg mb-5 text-xl'>
             {error}
