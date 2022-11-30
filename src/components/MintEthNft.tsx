@@ -179,7 +179,8 @@ const MintEthNft: FC<{ signer: any }> = ({ signer }) => {
         ) : balance &&
           balance.value &&
           data &&
-          balance.value.lt(data.nftPrice) ? (
+          balance.value.lt(data.nftPrice) &&
+          !mintingFree ? (
           <ParagraphTag className='text-2xl'>Insufficient Balance</ParagraphTag>
         ) : (
           <button
