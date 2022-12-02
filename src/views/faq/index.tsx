@@ -257,7 +257,7 @@ export const FAQView: FC = ({ children }) => {
             but we’ve never been the type to follow rules. 🤷‍♀️
           </ParagraphTag>
           <ParagraphTag className='mb-4 text-xl'>
-            his project was born out of conversations our founder had with
+            This project was born out of conversations our founder had with
             native Solana builders, and we wanted to launch a small collection
             that honored our ties with the Solana DeFi community. On top of
             that, we’ve had endless requests from our Ethereum friends to mint
