@@ -11,6 +11,19 @@ export const PressView: FC = () => {
       <div>
         <div className='mb-20'>
           <HeaderTag type={3} className='text-3xl mt-5'>
+            New York Times
+          </HeaderTag>
+          <ParagraphTag className='mb-4 text-2xl underline'>
+            <a
+              href='https://www.nytimes.com/2022/12/01/style/crypto-awards.html'
+              target='_blank'
+            >
+              Crypto Crashes, but the Awards Go On
+            </a>
+          </ParagraphTag>
+        </div>
+        <div className='mb-20'>
+          <HeaderTag type={3} className='text-3xl mt-5'>
             Decrypt
           </HeaderTag>
           <ParagraphTag className='mb-4 text-2xl underline'>
