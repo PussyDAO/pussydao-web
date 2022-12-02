@@ -124,7 +124,7 @@ const MintEthNft: FC<{ signer: any }> = ({ signer }) => {
           </p>
         )}
       </div>
-      <div className='flex flex-row justify-center mt-4'>
+      <div className='relative flex flex-row justify-center mt-4'>
         <button
           onClick={() => adjustAmount('dec')}
           className='text-5xl bg-pink-200 text-black rounded-lg h-15 w-15 px-5 mx-5'
