@@ -1,5 +1,5 @@
 const anchor = require('@project-serum/anchor');
-const idl = require('../../../easy_mint.json');
+const idl = require('../../../../easy_mint.json');
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
@@ -116,18 +116,14 @@ export default async function handler(req, res) {
     });
     var txSerEnc = txSer.toString('base64');
 
-    res
-      .status(200)
-      .json({
-        message: 'Purchased PussyDAO OG List Token',
-        transaction: txSerEnc,
-      });
+    res.status(200).json({
+      message: 'Purchased PussyDAO OG List Token',
+      transaction: txSerEnc,
+    });
   } else {
-    res
-      .status(200)
-      .json({
-        label: 'Purchase PussyDAO OG List Token for 225 USDC',
-        icon: 'https://zpfbjw3hqjn42lq3l4ankh37mk57kizg6mkyoaa2i5rfkco4h5ia.arweave.net/y8oU22eCW80uG18A1R9_Yrv1IybzFYcAGkdiVQncP1A?ext=jpg',
-      });
+    res.status(200).json({
+      label: 'Purchase PussyDAO OG List Token for 225 USDC',
+      icon: 'https://zpfbjw3hqjn42lq3l4ankh37mk57kizg6mkyoaa2i5rfkco4h5ia.arweave.net/y8oU22eCW80uG18A1R9_Yrv1IybzFYcAGkdiVQncP1A?ext=jpg',
+    });
   }
 }
